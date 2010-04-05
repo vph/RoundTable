@@ -9,7 +9,6 @@ def index():
     return dict(topics=topics)
 
 def show():
-    ## show
     if not request.args(0).isdigit():
         redirect( URL (r=request, f='index') )    
     topic = db.topic[request.args(0)]
