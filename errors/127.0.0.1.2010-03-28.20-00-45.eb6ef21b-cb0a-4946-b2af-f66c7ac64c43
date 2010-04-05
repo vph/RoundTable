@@ -1,0 +1,17 @@
+(dp1
+S'output'
+p2
+S''
+sS'layer'
+p3
+S'/Users/vphan/Programs/forum/applications/roundtable/models/db.py'
+p4
+sS'code'
+p5
+S'db = DAL("sqlite://storage.db")\n\nfrom gluon.tools import Auth\nauth = Auth(globals(), db)\nauth.define_tables()\nauth.settings.registration_requires_approval = True\n\ndb.define_table(\'topic\',\n    Field(\'title\'),\n    Field(\'body\', \'text\'),\n    Field(\'author\'),\n    Field(\'created_on\', \'datetime\', default=request.now)\n)\n\ndb.topic.title.requires = IS_NOT_EMPTY()\ndb.topic.body.requires = IS_NOT_EMPTY()\ndb.topic.created_on.writable=False\ndb.topic.created_on.readable=False\n\ndb.define_table(\'comment\',\n    Field(\'author\'),\n    Field(\'body\', \'text\'),\n    Field(\'topic_id\', db.topic),\n    Field(\'created_on\', \'datetime\', default=request.now)\n)\ndb.comment.body.requires = IS_NOT_EMPTY()\ndb.comment.topic_id.requires = IS_IN_DB(db, db.topic.id, \'%(title)s\')\ndb.comment.topic_id.writable = False\ndb.comment.topic_id.readable = False\ndb.comment.created_on.writable=False\ndb.comment.created_on.readable=False\n\ndb(db.comment.id > 0).comment.delete()\n'
+p6
+sS'traceback'
+p7
+S'Traceback (most recent call last):\n  File "/Users/vphan/Programs/forum/gluon/restricted.py", line 173, in restricted\n    exec ccode in environment\n  File "/Users/vphan/Programs/forum/applications/roundtable/models/db.py", line 33, in <module>\n    db(db.comment.id > 0).comment.delete()\nAttributeError: \'Set\' object has no attribute \'comment\'\n'
+p8
+s.

@@ -1,0 +1,17 @@
+(dp1
+S'output'
+p2
+S''
+sS'layer'
+p3
+S'/Users/vphan/Programs/forum/applications/roundtable/controllers/default.py'
+p4
+sS'code'
+p5
+S"from gluon.tools import Crud\ncrud = Crud(globals(), db)\n\ndef user():\n    return dict(form=auth())\n    \ndef index():\n    db(db.comment.id > 0).comment.delete()\n    topics = db().select(db.topic.ALL, orderby=db.topic.id)\n    return dict(topics=topics)\n\ndef show():\n    if not request.args(0).isdigit():\n        redirect( URL (r=request, f='index') )    \n    topic = db.topic[request.args(0)]\n    if not topic:\n        redirect( URL (r=request, f='index') )\n    comments = db(db.comment.topic_id==topic.id).select()\n    db.comment.topic_id.default = topic.id\n    comment_form = crud.create(db.comment, next=URL(r=request, f='show', args=request.args(0)), message='your comment is created.')\n    return dict(topic=topic, comments=comments, comment_form=comment_form)\n    \n@auth.requires_login()\ndef add_topic():\n    form = crud.create(db.topic, next=URL(r=request, f='index'), message='your topic is created.')\n    return dict(form=form)\n\n@auth.requires_login()\ndef edit_topic():\n    if not request.args(0).isdigit():\n        redirect( URL (r=request, f='index') )    \n    this_topic = db.topic[request.args(0)]\n    if not this_topic:\n        redirect( URL (r=request, f='index') )\n    form = crud.update(db.topic, request.args(0), next=URL(r=request, f='show', args=request.args(0)), message='your topic is updated.')\n    return dict(form=form)\n\n@auth.requires_login()\ndef reply():\n    if not request.args(0).isdigit():\n        redirect( URL (r=request, f='index') )    \n    this_topic = db.topic[request.args(0)]\n    if not this_topic:\n        redirect( URL(r=request, f='index') )\n    db.comment.topic_id.default = request.args(0)\n    form = crud.create(db.comment, next=URL(r=request, f='show', args=request.args(0)), message='your comment is created')\n    return dict(form=form)\n\nresponse._vars=response._caller(index)\n"
+p6
+sS'traceback'
+p7
+S'Traceback (most recent call last):\n  File "/Users/vphan/Programs/forum/gluon/restricted.py", line 173, in restricted\n    exec ccode in environment\n  File "/Users/vphan/Programs/forum/applications/roundtable/controllers/default.py", line 49, in <module>\n  File "/Users/vphan/Programs/forum/gluon/globals.py", line 96, in <lambda>\n    self._caller = lambda f: f()\n  File "/Users/vphan/Programs/forum/applications/roundtable/controllers/default.py", line 8, in index\n    db(db.comment.id > 0).comment.delete()\nAttributeError: \'Set\' object has no attribute \'comment\'\n'
+p8
+s.

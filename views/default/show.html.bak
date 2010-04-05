@@ -1,0 +1,21 @@
+{{extend 'layout.html'}}
+{{import gluon}}
+
+<h1>{{=topic.title}}</h1>
+<p>created by {{=topic.userid.first_name}} on {{=topic.created_on}}</p>
+<p>{{=gluon.contrib.markdown.WIKI(topic.body)}}</p>
+
+{{ if auth.is_logged_in(): }}
+    [{{=A('new comment', _href=URL(r=request, f='reply', args=topic.id))}}] &nbsp;
+    {{ if topic.userid == auth.user.id: }} 
+        [{{=A('edit', _href=URL(r=request, f='edit_topic', args=topic.id))}}] <br>
+    {{ pass }}
+{{ pass }}
+
+{{for comment in comments:}}
+    <p>{{=comment.userid.first_name}} says: <i>{{=comment.body}}</i>
+    {{ if auth.is_logged_in() and comment.userid == auth.user.id: }}
+        [{{=A('edit', _href=URL(r=request, f='edit_comment', args=comment.id))}}]
+    {{ pass }}
+    </p>
+{{pass}}

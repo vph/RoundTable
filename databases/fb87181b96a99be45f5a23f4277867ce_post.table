@@ -1,0 +1,26 @@
+(dp1
+S'body'
+p2
+S'TEXT'
+p3
+sS'title'
+p4
+S'CHAR(512)'
+p5
+sS'author'
+p6
+S'CHAR(512)'
+p7
+sS'created_on'
+p8
+S'TIMESTAMP'
+p9
+sS'date'
+p10
+S'TIMESTAMP'
+p11
+sS'id'
+p12
+S'INTEGER PRIMARY KEY AUTOINCREMENT'
+p13
+s.

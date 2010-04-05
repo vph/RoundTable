@@ -1,0 +1,17 @@
+(dp1
+S'output'
+p2
+S''
+sS'layer'
+p3
+S'/Users/vphan/Programs/forum/applications/roundtable/controllers/default.py'
+p4
+sS'code'
+p5
+S'def index():\n    posts = db().select(db.post.ALL, orderby=db.post.id)\n    return dict(posts=posts)\n\ndef show():\n#    post = db(db.post.id==request.args(0)).select()[0]\n#    comments = db(db.comment.post_id==post.id).select()\n    return dict(post=post, comments=comments)\n\nresponse._vars=response._caller(show)\n'
+p6
+sS'traceback'
+p7
+S'Traceback (most recent call last):\n  File "/Users/vphan/Programs/forum/gluon/restricted.py", line 173, in restricted\n    exec ccode in environment\n  File "/Users/vphan/Programs/forum/applications/roundtable/controllers/default.py", line 10, in <module>\n  File "/Users/vphan/Programs/forum/gluon/globals.py", line 96, in <lambda>\n    self._caller = lambda f: f()\n  File "/Users/vphan/Programs/forum/applications/roundtable/controllers/default.py", line 8, in show\n    return dict(post=post, comments=comments)\nNameError: global name \'post\' is not defined\n'
+p8
+s.

@@ -1,0 +1,124 @@
+timestamp: 2010-03-23T15:37:17.218092
+CREATE TABLE auth_user(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name CHAR(128),
+    last_name CHAR(128),
+    email CHAR(512),
+    password CHAR(512),
+    registration_key CHAR(512),
+    reset_password_key CHAR(512)
+);
+success!
+timestamp: 2010-03-23T15:37:17.221135
+CREATE TABLE auth_group(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    role CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2010-03-23T15:37:17.223444
+CREATE TABLE auth_membership(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id REFERENCES auth_user(id) ON DELETE CASCADE,
+    group_id REFERENCES auth_group(id) ON DELETE CASCADE
+);
+success!
+timestamp: 2010-03-23T15:37:17.227173
+CREATE TABLE auth_permission(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    group_id REFERENCES auth_group(id) ON DELETE CASCADE,
+    name CHAR(512),
+    table_name CHAR(512),
+    record_id INTEGER
+);
+success!
+timestamp: 2010-03-23T15:37:17.230056
+CREATE TABLE auth_event(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    time_stamp TIMESTAMP,
+    client_ip CHAR(512),
+    user_id REFERENCES auth_user(id) ON DELETE CASCADE,
+    origin CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2010-03-23T15:55:55.182477
+CREATE TABLE post(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title CHAR(512),
+    body TEXT,
+    author CHAR(512),
+    date TIMESTAMP
+);
+success!
+timestamp: 2010-03-23T16:10:03.735774
+ALTER TABLE post ADD created_on TIMESTAMP;
+timestamp: 2010-03-23T16:20:35.978772
+CREATE TABLE comment(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    author CHAR(512),
+    body TEXT,
+    post_id REFERENCES post(id) ON DELETE CASCADE
+);
+success!
+timestamp: 2010-03-23T21:19:00.181836
+CREATE TABLE topic(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title CHAR(512),
+    body TEXT,
+    author CHAR(512),
+    created_on TIMESTAMP
+);
+success!
+timestamp: 2010-03-23T21:19:00.200556
+ALTER TABLE comment ADD topic_id REFERENCES topic(id) ON DELETE CASCADE;
+timestamp: 2010-03-23T22:08:17.364934
+ALTER TABLE comment ADD created_on TIMESTAMP;
+timestamp: 2010-03-28T19:12:53.860932
+CREATE TABLE auth_user(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name CHAR(128),
+    last_name CHAR(128),
+    email CHAR(512),
+    password CHAR(512),
+    registration_key CHAR(512),
+    reset_password_key CHAR(512)
+);
+success!
+timestamp: 2010-03-28T19:12:53.891817
+CREATE TABLE auth_group(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    role CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2010-03-28T19:12:53.906301
+CREATE TABLE auth_membership(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id REFERENCES auth_user(id) ON DELETE CASCADE,
+    group_id REFERENCES auth_group(id) ON DELETE CASCADE
+);
+success!
+timestamp: 2010-03-28T19:12:53.908818
+CREATE TABLE auth_permission(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    group_id REFERENCES auth_group(id) ON DELETE CASCADE,
+    name CHAR(512),
+    table_name CHAR(512),
+    record_id INTEGER
+);
+success!
+timestamp: 2010-03-28T19:12:53.911623
+CREATE TABLE auth_event(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    time_stamp TIMESTAMP,
+    client_ip CHAR(512),
+    user_id REFERENCES auth_user(id) ON DELETE CASCADE,
+    origin CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2010-03-28T20:17:39.250557
+ALTER TABLE topic ADD userid REFERENCES auth_user(id) ON DELETE CASCADE;
+timestamp: 2010-03-28T20:17:39.253964
+ALTER TABLE comment ADD userid CHAR(512);

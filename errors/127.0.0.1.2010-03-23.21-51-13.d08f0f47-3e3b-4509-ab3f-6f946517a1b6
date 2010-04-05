@@ -1,0 +1,17 @@
+(dp1
+S'output'
+p2
+S''
+sS'layer'
+p3
+S'/Users/vphan/Programs/forum/applications/roundtable/controllers/default.py'
+p4
+sS'code'
+p5
+S"from gluon.tools import Crud\ncrud = Crud(globals(), db)\n\ndef index():\n    topics = db().select(db.topic.ALL, orderby=db.topic.id)\n    return dict(topics=topics)\n\ndef show():\n    topic = db(db.topic.id==request.args(0)).select()[0]\n    comments = db(db.comment.topic_id==topic.id).select()\n    return dict(topic=topic, comments=comments)\n    \ndef add_topic():\n    form = crud.create(db.topic, next=URL(r=request, f='index'), message='your topic is created')\n    return dict(form=form)\n    \ndef reply():\n    #db.comment.topic_id.default = request.args(0)\n    form = crud.create(db.comment, next=URL(r=request, f='show', args=db.comment.topic_id), message='your comment is created')\n    return dict(form=form)\n\nresponse._vars=response._caller(reply)\n"
+p6
+sS'traceback'
+p7
+S'Traceback (most recent call last):\n  File "/Users/vphan/Programs/forum/gluon/restricted.py", line 173, in restricted\n    exec ccode in environment\n  File "/Users/vphan/Programs/forum/applications/roundtable/controllers/default.py", line 22, in <module>\n  File "/Users/vphan/Programs/forum/gluon/globals.py", line 96, in <lambda>\n    self._caller = lambda f: f()\n  File "/Users/vphan/Programs/forum/applications/roundtable/controllers/default.py", line 19, in reply\n    form = crud.create(db.comment, next=URL(r=request, f=\'show\', args=db.comment.topic_id), message=\'your comment is created\')\n  File "/Users/vphan/Programs/forum/gluon/html.py", line 176, in URL\n    if args != [] and not isinstance(args, (list, tuple)):\n  File "/Users/vphan/Programs/forum/gluon/sql.py", line 2427, in __ne__\n    return Query(self, \'<>\', value)\n  File "/Users/vphan/Programs/forum/gluon/sql.py", line 2839, in __init__\n    right = sql_represent(right, left.type, left._db._dbname, left._db._db_codec)\n  File "/Users/vphan/Programs/forum/gluon/sql.py", line 510, in sql_represent\n    return str(int(obj))\nTypeError: int() argument must be a string or a number, not \'list\'\n'
+p8
+s.

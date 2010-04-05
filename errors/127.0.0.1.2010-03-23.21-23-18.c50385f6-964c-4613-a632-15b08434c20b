@@ -1,0 +1,17 @@
+(dp1
+S'output'
+p2
+S''
+sS'layer'
+p3
+S'/Users/vphan/Programs/forum/applications/roundtable/controllers/default.py'
+p4
+sS'code'
+p5
+S"def index():\n    topics = db().select(db.topic.ALL, orderby=db.topic.id)\n    return dict(topics=topics)\n\ndef show():\n    topic = db(db.topic.id==request.args(0)).select()[0]\n    comments = db(db.comment.topic_id==topic.id).select()\n    return dict(topic=topic, comments=comments)\n    \ndef add_topic():\n    form = crud.create(db.comment, next=URL(), message='your topic is created')\n    return dict(form=form)\n\nresponse._vars=response._caller(add_topic)\n"
+p6
+sS'traceback'
+p7
+S'Traceback (most recent call last):\n  File "/Users/vphan/Programs/forum/gluon/restricted.py", line 173, in restricted\n    exec ccode in environment\n  File "/Users/vphan/Programs/forum/applications/roundtable/controllers/default.py", line 14, in <module>\n  File "/Users/vphan/Programs/forum/gluon/globals.py", line 96, in <lambda>\n    self._caller = lambda f: f()\n  File "/Users/vphan/Programs/forum/applications/roundtable/controllers/default.py", line 11, in add_topic\n    form = crud.create(db.comment, next=URL(), message=\'your topic is created\')\nNameError: global name \'crud\' is not defined\n'
+p8
+s.

@@ -1,0 +1,17 @@
+(dp1
+S'output'
+p2
+S''
+sS'layer'
+p3
+S'/Users/vphan/Programs/forum/applications/roundtable/models/plugin_tagging.py'
+p4
+sS'code'
+p5
+S'if not \'db\' in globals():\n    raise HTTP(500,"plugin _tagging requires \'db\' and \'auth\'")\n\ndb.define_table(\'plugin_tagging_tag\',\n    Field(\'name\'),\n    Field(\'links\',\'integer\',default=0,writable=False),\n    Field(\'created_by\',db.auth_user,writable=False,readable=False),\n    Field(\'created_on\',\'datetime\',default=request.now,writable=False,readable=False),\n    format=\'%(name)s\')\n\ndb.plugin_tagging_tag.created_by.default=(auth.user and auth.user.id) or 0\n\ndb.define_table(\'plugin_tagging_link\', \n    Field(\'tag\',db.plugin_tagging_tag),   \n    Field(\'table_name\'),\n    Field(\'record_id\',\'integer\'))\n\ndb.define_table(\'plugin_tagging_subscription\',\n    Field(\'auth_user\',db.auth_user),\n    Field(\'tag\',db.plugin_tagging_tag))\n\n   \ndb.plugin_tagging_tag.name.requires = IS_NOT_EMPTY()\ndb.plugin_tagging_link.tag.requires = IS_IN_DB(db,\'plugin_tagging_tag.id\',\'%(name)s\')\n\n\ndef plugin_tagging(table_name=None,record_id=0):\n    """\n    You can tag a record of a table by embedding this::\n\n    {{=tag(\'mytable\',45)}}\n\n    where \'mytable\' is a table name and 45 is a record id.\n    It will display a tagging widget.\n    """\n    return LOAD(\'plugin_tagging\',args=(table_name,record_id),ajax=True)\n\ndef plugin_tagging_cloud():\n    return LOAD(\'plugin_tagging\',\'tag_cloud\')\n'
+p6
+sS'traceback'
+p7
+S'Traceback (most recent call last):\n  File "/Users/vphan/Programs/forum/gluon/restricted.py", line 173, in restricted\n    exec ccode in environment\n  File "/Users/vphan/Programs/forum/applications/roundtable/models/plugin_tagging.py", line 7, in <module>\n    Field(\'created_by\',db.auth_user,writable=False,readable=False),\n  File "/Users/vphan/Programs/forum/gluon/sql.py", line 1295, in __getattr__\n    return dict.__getitem__(self,key)\nKeyError: \'auth_user\'\n'
+p8
+s.

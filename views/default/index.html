@@ -1,0 +1,9 @@
+{{extend 'layout.html'}}
+<h1>Welcome to RoundTable</h1>
+[{{=A('new topic', _href=URL(r=request, f="add_topic", args=''))}}] </ br>
+
+<ul>
+{{for topic in topics:}}
+<li>{{=A(topic.title, _href=URL(r=request, f="show", args=topic.id))}} by {{=topic.userid.first_name}}</li>
+{{pass}}
+</ul>

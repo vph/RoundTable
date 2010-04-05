@@ -1,0 +1,17 @@
+(dp1
+S'output'
+p2
+S''
+sS'layer'
+p3
+S'/Users/vphan/Programs/forum/applications/roundtable/models/db.py'
+p4
+sS'code'
+p5
+S'db = DAL("sqlite://storage.db")\ndb.define_table(\'post\',\n    Field(\'title\'),\n    Field(\'body\', \'text\'),\n    Field(\'author\'),\n    Field(\'date\', \'datetime\', default=request.now)\n)\n\ndb.post.title.requires = IS_NOT_EMPTY()\ndb.post.body.requires = IS_NOT_EMPTY()\ndb.post.date.writeable = False\n\n\n\x13\n'
+p6
+sS'traceback'
+p7
+S'Traceback (most recent call last):\n  File "/Users/vphan/Programs/forum/gluon/restricted.py", line 171, in restricted\n    ccode = compile(code.replace(\'\\r\\n\', \'\\n\'), layer, \'exec\')\n  File "/Users/vphan/Programs/forum/applications/roundtable/models/db.py", line 14\n    \x13\n    ^\nSyntaxError: invalid syntax\n'
+p8
+s.
